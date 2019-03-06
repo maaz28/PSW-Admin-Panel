@@ -1,0 +1,9 @@
+.para-spacing {
+    margin: 16px 0px;
+    line-height: 1.5;
+    color : '#3c3636'
+} 
+
+.text-field {
+    width: 60%
+}
