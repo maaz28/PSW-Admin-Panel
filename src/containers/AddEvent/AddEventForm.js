@@ -81,19 +81,6 @@ closePopupHandler = () => {
     }
   }
 
-  eventStartDateHandler = (val) => {
-    console.log(val)
-    this.setState({
-      start_time : val
-    })
-  }
-
-  eventEndsDateHandler = (val) => {
-    console.log(val);
-    this.setState({
-      end_time : val
-    })
-  }
 
   onChangeParentHandler = (name ,value) => {
     console.log(name, value)
