@@ -10,6 +10,14 @@ class All extends Component {
   state = {
     product : []
   }
+
+  deleteBtnHandler= ()=>{
+
+  }
+
+  editBtnHanlder=()=>{
+
+  }
  
   componentDidMount () {
     get_request(api_base_url + "/products")
@@ -30,30 +38,29 @@ class All extends Component {
       <div className="App">
         <Grid container spacing={24}>
         {
-          this.state.product.map((value, i) => (
+          this.state.product.map((item, i) => (
         <Grid xs={4}>
         <Card >
       <CardActionArea>
         <CardMedia
-          
-          image="https://goo.gl/images/B5WXAr"
-          title="Contemplative Reptile"
+          style = {{ height: 0, paddingTop: '56%'}}
+          image= {item.product_images[0]}
+          title={item.title}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {/* {obj.title} */}
           </Typography>
           <Typography component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
+            {item.short_title_description}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" onClick={this.editBtnHanlder}>
           Edit
         </Button>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" onClick={this.deleteBtnHandler}>
           Delete
         </Button>
       </CardActions>
