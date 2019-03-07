@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ProductCardView from '../../../../components/shared/card'
 import Grid from '@material-ui/core/Grid';
-import {get_request} from '../../../../utils/helper'
+import {get_request, delete_request} from '../../../../utils/helper'
 import {api_base_url} from '../../../../config/api-configuration'
 import { CardActions, Button, Typography, CardContent, CardMedia, CardActionArea, Card } from '@material-ui/core';
  
@@ -11,8 +11,13 @@ class All extends Component {
     product : []
   }
 
-  deleteBtnHandler= ()=>{
-
+  deleteBtnHandler= (id)=>{
+console.log("delete")
+delete_request(api_base_url+"/admin/product/"+id).
+then((res)=>{
+  console.log(res)
+}
+)
   }
 
   editBtnHanlder=()=>{
@@ -60,7 +65,7 @@ class All extends Component {
         <Button size="small" color="primary" onClick={this.editBtnHanlder}>
           Edit
         </Button>
-        <Button size="small" color="primary" onClick={this.deleteBtnHandler}>
+        <Button size="small" color="primary" onClick={() => {this.deleteBtnHandler(item._id)} }>
           Delete
         </Button>
       </CardActions>
