@@ -24,12 +24,14 @@ import './style.css';
 import Add from './DashboardItems/Add'
 import All from './DashboardItems/All'
 import { List } from '@material-ui/core';
+import { Z_FIXED } from 'zlib';
 
 
 const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
+    // position:'fixed',
     display: 'flex',
   },
   toolbar: {
@@ -127,7 +129,8 @@ class Dashboard extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div className={classes.root}>
+      <div className={classes.root} >
+      
         <CssBaseline />
         <AppBar
           position="absolute"
@@ -188,6 +191,7 @@ class Dashboard extends React.Component {
         </div>
         </Router>
         </main>
+        
       </div>
     );
   }
