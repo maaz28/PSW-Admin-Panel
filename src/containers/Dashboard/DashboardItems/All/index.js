@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ProductCardView from '../../../../components/shared/card'
 import Grid from '@material-ui/core/Grid';
-import {get_request} from '../../../../utils/helper'
+import {get_request, delete_request} from '../../../../utils/helper'
 import {api_base_url} from '../../../../config/api-configuration'
 import { CardActions, Button, Typography, CardContent, CardMedia, CardActionArea, Card } from '@material-ui/core';
  
@@ -9,6 +9,19 @@ import { CardActions, Button, Typography, CardContent, CardMedia, CardActionArea
 class All extends Component {
   state = {
     product : []
+  }
+
+  deleteBtnHandler= (id)=>{
+console.log("delete")
+delete_request(api_base_url+"/admin/product/"+id).
+then((res)=>{
+  console.log(res)
+}
+)
+  }
+
+  editBtnHanlder=()=>{
+
   }
  
   componentDidMount () {
@@ -31,29 +44,28 @@ class All extends Component {
         <Grid container spacing={24}>
         {
           this.state.product.map((item, i) => (
-        <Grid xs={4}>
-        <Card >
+        <Grid xs={12} sm = {6} md = {4}>
+        <Card  style={{margin:'8px',boxShadow:" 0 0 8px 1px grey"}}>
       <CardActionArea>
         <CardMedia
-          
-          image="https://goo.gl/images/B5WXAr"
-          title="Contemplative Reptile"
+          style = {{ height: 0, paddingTop: '80%'}}
+          image= {item.product_images[0]}
+          title={item.title}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {/* {obj.title} */}
           </Typography>
           <Typography component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
+            {item.short_title_description}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" onClick={this.editBtnHanlder}>
           Edit
         </Button>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" onClick={() => {this.deleteBtnHandler(item._id)} }>
           Delete
         </Button>
       </CardActions>
