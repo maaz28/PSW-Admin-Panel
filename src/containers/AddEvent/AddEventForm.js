@@ -13,18 +13,13 @@ import Button from '@material-ui/core/Button';
 
 class AddEventForm extends React.Component {
 state ={
-        name: "Burgerlab",
-        formatted_address: "Block 2, Gulshan Iqbal, Karachi",
-        formatted_address_short: "Gulshan Iqbal",
-        website: "www.pizzahut.pk",
-        formatted_phone_number: "+923238364646",
-        description: "Best Pizzas in town",
-        banner_image : "",
-        cost : '',
-        food_type : '',
-        facebook_url : '',
-  dialogOpen : false,
-  loader : false
+  title : '',
+  description : '',
+  price : '',
+  short_title_description : '',
+  category : '',
+  color : [],
+  images : []
 }
 
 
@@ -35,50 +30,70 @@ closePopupHandler = () => {
   history.push('/')
 }
 
-  submitHandler = () =>{
+colorHandler = (value, selected) => {
+    let arr = this.state.color;
+  if (selected) {
+    arr.push(value);
     this.setState({
-      loader : true
+      color : arr
     })
-    const stateObj = this.state;
-    if(stateObj.title === '' || stateObj.description === '' || stateObj.venue === '')
-    {
-      alert('Some Fields Are Missing')
+  }
+  else {
+    let ind = arr.indexOf(value);
+    if(ind !== -1) {
+      arr.splice(ind, 1)
       this.setState({
-        loader : false
+        color : arr
       })
-    }else{
-      let obj = {
-        name: this.state.name,
-        email : this.props.email,
-        password : this.props.password,
-        formatted_address: this.state.formatted_address,
-        formatted_address_short: this.state.formatted_address_short,
-        website: this.state.website,
-        formatted_phone_number: this.state.formatted_phone_number,
-        description: this.state.description,
-        banner_image : this.state.banner_image,
-        cost : this.state.cost,
-        food_type : this.state.food_type,
-        facebook_url : this.state.facebook_url,
-      }
-        post_request(api_base_url + '/portal/place-register', obj)
-        .then((res) => {
-          this.setState({
-            loader : false,
-            dialogOpen : true,
-            title : '',
-            short_description : '',
-            description : '',
-            venue : '',
-            website_link : '',
-            title_image : '',
-            food_type: "",
-            facebook_url: "",
-            cost: 1,
-          })
-        })
-      .catch(err => console.log(err))
-    }
+    } 
+  }
+}
+
+  submitHandler = () =>{
+    console.log(this.state)
+    // this.setState({
+    //   loader : true
+    // })
+    // const stateObj = this.state;
+    // if(stateObj.title === '' || stateObj.description === '')
+    // {
+    //   alert('Some Fields Are Missing')
+    //   this.setState({
+    //     loader : false
+    //   })
+    // }else{
+    //   let obj = {
+    //     name: this.state.name,
+    //     email : this.props.email,
+    //     password : this.props.password,
+    //     formatted_address: this.state.formatted_address,
+    //     formatted_address_short: this.state.formatted_address_short,
+    //     website: this.state.website,
+    //     formatted_phone_number: this.state.formatted_phone_number,
+    //     description: this.state.description,
+    //     banner_image : this.state.banner_image,
+    //     cost : this.state.cost,
+    //     food_type : this.state.food_type,
+    //     facebook_url : this.state.facebook_url,
+    //   }
+    //     post_request(api_base_url + '/portal/place-register', obj)
+    //     .then((res) => {
+    //       this.setState({
+    //         loader : false,
+    //         dialogOpen : true,
+    //         title : '',
+    //         short_description : '',
+    //         description : '',
+    //         venue : '',
+    //         website_link : '',
+    //         title_image : '',
+    //         food_type: "",
+    //         facebook_url: "",
+    //         cost: 1,
+    //       })
+    //     })
+    //   .catch(err => console.log(err))
+    // }
   }
 
 
@@ -89,11 +104,8 @@ closePopupHandler = () => {
     });
   }
 
-  singleUrlHandler = (url) => {
-    console.log(url);
-    this.setState({
-      banner_image : url
-    })
+  urlHandler = (url) => {
+    console.log(url)
   }
 
 
@@ -101,12 +113,20 @@ closePopupHandler = () => {
 
     return (
       <div>
-      <EventForm onChangeParentHandler = {this.onChangeParentHandler}/>
+      <EventForm onChangeParentHandler = {this.onChangeParentHandler} colorHandler = {this.colorHandler}/>
         <div>
-        <h4 className = "title">Banner Image</h4>
-        <div>
-        <ImageUploader urlHandler = {this.singleUrlHandler}/>
-        </div>
+        <h4 className = "title">Product Images</h4>
+        <Grid container spacing={24}>
+          <Grid item xs={4}>
+        <ImageUploader urlHandler = {this.urlHandler}/>
+          </Grid>
+          <Grid item xs={4}>
+        <ImageUploader urlHandler = {this.urlHandler}/>              
+          </Grid>
+          <Grid item xs={4}>
+        <ImageUploader urlHandler = {this.urlHandler}/>              
+          </Grid>
+        </Grid>
         </div>
       <div>
       <Grid container spacing={24}>

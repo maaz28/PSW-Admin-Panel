@@ -20,7 +20,7 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: '48%',
+    width: '50%',
   },
   dense: {
     marginTop: 19,
@@ -43,30 +43,24 @@ class EventForm extends React.Component {
     title_err : false,
     desc_err : false,
     formatted_address_short_err : false,
-    titleHelperText : ''
-  }
-
-  //Events Of Dynamic Field Used to update value in the parent
-  firstFieldHandler = (value) => {
-    console.log(value)
-    this.props.onChangeParentHandler('video', value);
-  }
-
-  addMoreFieldsHandler = (value) => {
-    console.log(value)
-    this.props.onChangeParentHandler('dynamicVideoUrl', value);
+    titleHelperText : '',
+    category : ''
   }
 
   handleChange = name => event => {
       console.log(name, event.target.value)
       this.props.onChangeParentHandler(name, event.target.value);
   };
+
   handleDropDownChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
+    console.log(event.target.value)
+    this.setState({ category : event.target.value });
+      this.props.onChangeParentHandler("category", event.target.value);
   };
 
   handleSelectChange = name => event => {
-    this.setState({ [name]: event.target.checked });
+    console.log(event.target.value, event.target.checked, event.target.selected);
+    this.props.colorHandler(event.target.value, event.target.checked);
   };
 
   titleErrHandler = (ev) => {
@@ -96,24 +90,14 @@ class EventForm extends React.Component {
           error = {this.state.title_err}
           helperText = {this.state.titleHelperText}
           required
+          fullWidth
           id="title"
           label="Title"
           className={classes.textField}
           margin="normal"
-          placeholder = "Pizza Hut"
-          onChange = {this.handleChange('name')}
+          placeholder = "Natural Salt Lamp | Best Quality"
+          onChange = {this.handleChange('title')}
           />
-        {/* <TextField
-        // onBlur ={this.titleErrHandler}
-        error = {this.state.formatted_address_short_err}
-          required
-          id="formatted_address_short"
-          label="Area"
-          className={classes.textField}
-          margin="normal"
-          placeholder = "DHA phase 6"
-          onChange = {this.handleChange('formatted_address_short')}
-        /> */}
         <TextField
         // onBlur ={this.titleErrHandler}
         
@@ -122,115 +106,62 @@ class EventForm extends React.Component {
           fullWidth
           id="description"
           label="Detailed Description"
+          className={classes.textField}
           multiline
-          rowsMax="2"
-          style = {{marginLeft: '8px', marginRight: '8px',width:'50%'}}     
-          margin="normal"
+          rowsMax="2"   
+          margin="normal" 
           onChange = {this.handleChange('description')}
         />
-          {/* <TextField
-          onBlur ={this.titleErrHandler}
-          error = {this.state.title_err}
-          helperText = {this.state.titleHelperText}
-          required
-          id="title"
-          label="Detailed Description"
-          className={classes.textField}
-          margin="normal"
-          placeholder = "XYZ product"
-          onChange = {this.handleChange('formatted_address')}
-          /> */}
-        {/* <TextField
-        // onBlur ={this.titleErrHandler}
-        error = {this.state.formatted_address_short_err}
-          required
-          id="formatted_phone_number"
-          label="Contact Number"
-          className={classes.textField}
-          margin="normal"
-          placeholder = "+923311384234"
-          onChange = {this.handleChange('formatted_phone_number')}
-        /> */}
 
-<TextField
+          <TextField
           onBlur ={this.titleErrHandler}
           error = {this.state.title_err}
           helperText = {this.state.titleHelperText}
           required
+          // fullWidth
           id="title"
           label="Short Description"
           className={classes.textField}
           margin="normal"
           placeholder = "short Description"
-          onChange = {this.handleChange('website')}
+          onChange = {this.handleChange('short_title_description')}
           />
-
-        {/* <TextField
+        <TextField 
         // onBlur ={this.titleErrHandler}
         error = {this.state.formatted_address_short_err}
           required
-          id="formatted_phone_number"
-          label="Facebook Page Link"
-          className={classes.textField}
-          margin="normal"
-          placeholder = "www.facebook.com"
-          onChange = {this.handleChange('facebook_url')}
-        /> */}
-
-        {/* <TextField
-          onBlur ={this.titleErrHandler}
-          error = {this.state.title_err}
-          helperText = {this.state.titleHelperText}
-          required
-          id="title"
-          label="Type Of Restaurant"
-          className={classes.textField}
-          margin="normal"
-          placeholder = "Fast Food, Cuisine etc"
-          onChange = {this.handleChange('food_type')}
-        /> */}
-        <TextField
-        // onBlur ={this.titleErrHandler}
-        error = {this.state.formatted_address_short_err}
-          required
+          fullWidth
           id="Cost"
           type = "number"
           label="Price"
           className={classes.textField}
           margin="normal"
           placeholder = "20000"
-          onChange = {this.handleChange('cost')}
+          onChange = {this.handleChange('price')}
         />
 
 
             <FormControl className={classes.formControl}  style={{width:'50%'}}>      
          <InputLabel htmlFor="age-simple">Category</InputLabel>
-          <Select
-          
-            
-            value={this.state.age}
+          <Select 
+            value= {this.state.category}
             onChange={this.handleDropDownChange}
-            inputProps={{
-              name: 'age',
-              id: 'age-simple',
-            }}
           >
-            <MenuItem value="">
+            <MenuItem> 
               <em>None</em>
             </MenuItem>
-            <MenuItem value={10}>Natural Salt Lamps</MenuItem>
-            <MenuItem value={20}>Crafted Salt Lamps</MenuItem>
-            <MenuItem value={30}>Aroma Salt Lamps</MenuItem>
-            <MenuItem value={40}>USB Salt Lamps</MenuItem>
-            <MenuItem value={10}>Iron Salt Baskets</MenuItem>
-            <MenuItem value={20}>WoodenSalt Baskets</MenuItem>
-            <MenuItem value={30}>Night Light Lamps</MenuItem>
-            <MenuItem value={40}>Edible Salts</MenuItem>
-            <MenuItem value={10}>Animal Lick Salt</MenuItem>
-            <MenuItem value={20}>Salt Tiles</MenuItem>
-            <MenuItem value={30}>Candel Holders</MenuItem>
-            <MenuItem value={40}>Health Care Products</MenuItem>
-            {/* <MenuItem value={50}>Red</MenuItem> */}
+            <MenuItem value={"natural_salt_lamp"}>Natural Salt Lamps</MenuItem>
+            <MenuItem value={"crafted_salt_lamp"}>Crafted Salt Lamps</MenuItem>
+            <MenuItem value={"aroma_salt_lamp"}>Aroma Salt Lamps</MenuItem>
+            <MenuItem value={"usb_salt_lamp"}>USB Salt Lamps</MenuItem>
+            <MenuItem value={"iron_Salt_basket"}>Iron Salt Baskets</MenuItem>
+            <MenuItem value={"wooden_salt_basket"}>WoodenSalt Baskets</MenuItem>
+            <MenuItem value={"night_light_lamp"}>Night Light Lamps</MenuItem>
+            <MenuItem value={"edible_salt"}>Edible Salts</MenuItem>
+            <MenuItem value={"animal_lick_salt"}>Animal Lick Salt</MenuItem>
+            <MenuItem value={"salt_tile"}>Salt Tiles</MenuItem>
+            <MenuItem value={"candle_holder"}>Candel Holders</MenuItem>
+            <MenuItem value={"health_care_product"}>Health Care Products</MenuItem>
           </Select>
           </FormControl>
 
@@ -260,7 +191,7 @@ class EventForm extends React.Component {
               control={
                 <Checkbox onChange={this.handleSelectChange('black')} value="black"/>
               }
-              label="Balack Color"
+              label="Black Color"
             />
           </FormGroup>
           {/* <FormHelperText>Be careful</FormHelperText> */}

@@ -5,12 +5,12 @@ import 'firebase/storage';
 
   // Initialize Firebase
   var config = {
-    apiKey: "AIzaSyCnVkoC2huB1dkhckDS9asn7XxzMKrPhnQ",
-    authDomain: "buildability-fe26b.firebaseapp.com",
-    databaseURL: "https://buildability-fe26b.firebaseio.com",
-    projectId: "buildability-fe26b",
-    storageBucket: "buildability-fe26b.appspot.com",
-    messagingSenderId: "39614072054"
+    apiKey: "AIzaSyCI8SYNxG5dVkm5WzzJ3dvDz2fS1SDFroU",
+    authDomain: "pinksaltworks-a4004.firebaseapp.com",
+    databaseURL: "https://pinksaltworks-a4004.firebaseio.com",
+    projectId: "pinksaltworks-a4004",
+    storageBucket: "pinksaltworks-a4004.appspot.com",
+    messagingSenderId: "195459407092"
   };
   firebase.initializeApp(config);
 
