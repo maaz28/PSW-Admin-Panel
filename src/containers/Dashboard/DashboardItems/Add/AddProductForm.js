@@ -64,34 +64,6 @@ class AddProductForm extends React.Component {
       <div>
         <AddEvent/>
       </div>
-//       <form className={classes.container} noValidate autoComplete="off">
-// <Grid container spacing={24}>
-//         <Grid item xs={12}>
-//         <TextField
-//           id="outlined-dense"
-//           label="Dense"
-//           className={classNames(classes.textField, classes.dense)}
-//           margin="dense"
-//           variant="outlined"
-//         />
-//         <TextField
-//           id="outlined-multiline-flexible"
-//           label="Multiline"
-//           multiline
-//           rowsMax="4"
-//           value={this.state.multiline}
-//           onChange={this.handleChange('multiline')}
-//           className={classes.textField}
-//           margin="normal"
-//           helperText="hello"
-//           variant="outlined"
-//         />
-//       </Grid>
-//         <Grid item xs={12}>      
-// </Grid>
-// </Grid>
-
-//       </form>
     );
   }
 }

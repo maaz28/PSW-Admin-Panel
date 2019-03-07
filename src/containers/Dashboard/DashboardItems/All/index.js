@@ -30,7 +30,7 @@ class All extends Component {
       <div className="App">
         <Grid container spacing={24}>
         {
-          this.state.product.map((value, i) => (
+          this.state.product.map((item, i) => (
         <Grid xs={4}>
         <Card >
       <CardActionArea>

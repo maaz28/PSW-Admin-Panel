@@ -24,6 +24,7 @@ class ImageUploader extends Component {
   };
 
   handleUploadSuccess = filename => {
+    console.log(filename)
     this.setState({ avatar: filename, progress: 100, isUploading: false });
     storage
       .ref("images")

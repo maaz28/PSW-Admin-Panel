@@ -13,21 +13,21 @@ import Button from '@material-ui/core/Button';
 
 class AddEventForm extends React.Component {
 state ={
-  title : '',
+  title : '', 
   description : '',
   price : '',
   short_title_description : '',
   category : '',
   color : [],
-  images : []
+  images : [],
+  dialogOpen : false
 }
-
 
 closePopupHandler = () => {
   this.setState({
     dialogOpen : false
   });
-  history.push('/')
+  history.push('/dashboard/all-products')
 }
 
 colorHandler = (value, selected) => {
@@ -51,49 +51,41 @@ colorHandler = (value, selected) => {
 
   submitHandler = () =>{
     console.log(this.state)
-    // this.setState({
-    //   loader : true
-    // })
-    // const stateObj = this.state;
-    // if(stateObj.title === '' || stateObj.description === '')
-    // {
-    //   alert('Some Fields Are Missing')
-    //   this.setState({
-    //     loader : false
-    //   })
-    // }else{
-    //   let obj = {
-    //     name: this.state.name,
-    //     email : this.props.email,
-    //     password : this.props.password,
-    //     formatted_address: this.state.formatted_address,
-    //     formatted_address_short: this.state.formatted_address_short,
-    //     website: this.state.website,
-    //     formatted_phone_number: this.state.formatted_phone_number,
-    //     description: this.state.description,
-    //     banner_image : this.state.banner_image,
-    //     cost : this.state.cost,
-    //     food_type : this.state.food_type,
-    //     facebook_url : this.state.facebook_url,
-    //   }
-    //     post_request(api_base_url + '/portal/place-register', obj)
-    //     .then((res) => {
-    //       this.setState({
-    //         loader : false,
-    //         dialogOpen : true,
-    //         title : '',
-    //         short_description : '',
-    //         description : '',
-    //         venue : '',
-    //         website_link : '',
-    //         title_image : '',
-    //         food_type: "",
-    //         facebook_url: "",
-    //         cost: 1,
-    //       })
-    //     })
-    //   .catch(err => console.log(err))
-    // }
+    this.setState({
+      loader : true
+    })
+    const stateObj = this.state;
+    if(stateObj.title === '' || stateObj.description === '' || stateObj.images.length === 0)
+    {
+      alert('Some Fields Are Missing')
+      this.setState({
+        loader : false
+      })
+    }else{
+      let obj = {
+         title : stateObj.title,
+  description : stateObj.description,
+  price : stateObj.price,
+  short_title_description : stateObj.short_title_description,
+  category : stateObj.category,
+  color : stateObj.color,
+  product_images : stateObj.images 
+      }
+        post_request(api_base_url + '/admin/product', obj)
+        .then((res) => {
+          this.setState({
+              title : '',
+              description : '',
+              price : '',
+              short_title_description : '',
+              category : '',
+              color : [],
+              product_images : [],
+              dialogOpen : true
+          })
+        })
+      .catch(err => console.log(err))
+    }
   }
 
 
@@ -105,7 +97,12 @@ colorHandler = (value, selected) => {
   }
 
   urlHandler = (url) => {
-    console.log(url)
+    console.log(url);
+    let arr = this.state.images;
+    arr.push(url);
+    this.setState({
+      images : arr
+    })
   }
 
 
@@ -143,7 +140,7 @@ colorHandler = (value, selected) => {
           }
           </Grid>
       </Grid>
-        <ConfirmationDialog closePopupHandler = {this.closePopupHandler} open = {this.state.dialogOpen} title = "You've applied for listing at Foodies" preview = "/dashboard"/>
+        <ConfirmationDialog closePopupHandler = {this.closePopupHandler} open = {this.state.dialogOpen} title = "Product Successfully Added" preview = "/dashboard"/>
       </div>
       </div>
     );
