@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { CardActions, Button, Typography, CardContent, CardMedia, CardActionArea, Card } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
+
 
 const styles = {
   card: {
@@ -12,12 +13,16 @@ const styles = {
   },
 }; 
 
-class ProductCardView extends React.PureComponent {
+class ProductCardView extends React.Component {
 
 render() {
-  const { classes } = this.props;
+  const { classes, obj } = this.props;
+  console.log('====================================');
+  console.log(obj);
+  console.log('====================================');
   return(
     <Card className={classes.card}>
+        <React.createFragment>
       <CardActionArea>
         <CardMedia
           className={classes.media}
@@ -26,7 +31,7 @@ render() {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Lizard
+            {/* {obj.title} */}
           </Typography>
           <Typography component="p">
             Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
@@ -42,6 +47,7 @@ render() {
           Delete
         </Button>
       </CardActions>
+        </React.createFragment>
     </Card>     
   )
 }
