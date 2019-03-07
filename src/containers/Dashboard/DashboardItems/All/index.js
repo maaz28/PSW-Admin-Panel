@@ -3,8 +3,8 @@ import ProductCardView from '../../../../components/shared/card'
 import Grid from '@material-ui/core/Grid';
 import {get_request, delete_request} from '../../../../utils/helper'
 import {api_base_url} from '../../../../config/api-configuration'
-import { CardActions, Button, Typography, CardContent, CardMedia, CardActionArea, Card } from '@material-ui/core';
- 
+import { CardActions, Button, Typography, CardContent, CardMedia, CardActionArea, Card} from '@material-ui/core';
+ import {Link} from 'react-router-dom'
 
 class All extends Component {
   state = {
@@ -28,7 +28,7 @@ then((res)=>{
     get_request(api_base_url + "/products")
     .then((res) => {
       this.setState({
-        product : res.data.result
+        // product : res.data.result
       })
       // this.setState({
       //   products : res.data.result
@@ -62,9 +62,11 @@ then((res)=>{
         </CardContent>
       </CardActionArea>
       <CardActions>
+        <Link to='/dashboard/edit-form'>
         <Button size="small" color="primary" onClick={this.editBtnHanlder}>
           Edit
         </Button>
+        </Link>
         <Button size="small" color="primary" onClick={() => {this.deleteBtnHandler(item._id)} }>
           Delete
         </Button>
