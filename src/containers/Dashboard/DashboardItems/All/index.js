@@ -39,11 +39,11 @@ class All extends Component {
         <Grid container spacing={24}>
         {
           this.state.product.map((item, i) => (
-        <Grid xs={4}>
-        <Card >
+        <Grid xs={12} sm = {6} md = {4}>
+        <Card  style={{margin:'8px',boxShadow:" 0 0 8px 1px grey"}}>
       <CardActionArea>
         <CardMedia
-          style = {{ height: 0, paddingTop: '56%'}}
+          style = {{ height: 0, paddingTop: '80%'}}
           image= {item.product_images[0]}
           title={item.title}
         />
