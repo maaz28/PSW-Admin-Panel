@@ -186,7 +186,7 @@ class Dashboard extends React.Component {
         <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Router history={history}>
-        <div>
+        <div> 
         <Route exact path = '/dashboard/add-product' component={Add}/>
         <Route exact path = '/dashboard/all-products' component={All}/>
         <Route exact path = '/dashboard/edit-form' component={editForm}/>
