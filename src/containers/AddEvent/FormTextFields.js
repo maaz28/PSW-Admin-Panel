@@ -98,20 +98,6 @@ class EventForm extends React.Component {
           placeholder = "Natural Salt Lamp | Best Quality"
           onChange = {this.handleChange('title')}
           />
-        <TextField
-        // onBlur ={this.titleErrHandler}
-        
-        error = {this.state.desc_err}
-          required
-          fullWidth
-          id="description"
-          label="Detailed Description"
-          className={classes.textField}
-          multiline
-          rowsMax="2"   
-          margin="normal" 
-          onChange = {this.handleChange('description')}
-        />
 
           <TextField
           onBlur ={this.titleErrHandler}
@@ -166,6 +152,21 @@ class EventForm extends React.Component {
           </FormControl>
 
 
+        <TextField
+        // onBlur ={this.titleErrHandler}
+        
+        error = {this.state.desc_err}
+          required
+          fullWidth
+          id="description"
+          label="Detailed Description"
+          className={classes.textField}
+          multiline
+          rowsMax="3"   
+          rows="3"
+          margin="normal" 
+          onChange = {this.handleChange('description')}
+        />
           <FormControl component="fieldset" className={classes.formControl} style={{width:'50%'}}>
           <FormLabel component="legend">Color</FormLabel>
           <FormGroup>   

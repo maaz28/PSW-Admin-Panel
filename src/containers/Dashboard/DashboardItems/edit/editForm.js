@@ -206,6 +206,7 @@ class EventForm extends React.Component {
           margin="normal"
           placeholder = "Natural Salt Lamp | Best Quality"
           onChange = {this.handleChange('title')}
+          value={this.props.edit_obj.title}
           />
         <TextField
         // onBlur ={this.titleErrHandler}
@@ -220,7 +221,9 @@ class EventForm extends React.Component {
           rowsMax="2"   
           margin="normal" 
           onChange = {this.handleChange('description')}
+          value={this.props.edit_obj.description}
         />
+        
 
           <TextField
           onBlur ={this.titleErrHandler}
@@ -234,6 +237,7 @@ class EventForm extends React.Component {
           margin="normal"
           placeholder = "short Description"
           onChange = {this.handleChange('short_title_description')}
+          value={this.props.edit_obj.short_title_description}
           />
         <TextField 
         // onBlur ={this.titleErrHandler}
@@ -247,13 +251,14 @@ class EventForm extends React.Component {
           margin="normal"
           placeholder = "20000"
           onChange = {this.handleChange('price')}
+          value={this.props.edit_obj.price}
         />
 
 
             <FormControl className={classes.formControl}  style={{width:'50%'}}>      
          <InputLabel htmlFor="age-simple">Category</InputLabel>
           <Select 
-            value= {this.state.category}
+            value= {this.props.edit_obj.category}
             onChange={this.handleDropDownChange}
           >
             <MenuItem> 
