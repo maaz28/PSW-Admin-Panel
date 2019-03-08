@@ -30,5 +30,21 @@ export const mainListItems = (
       <ListItemText primary="All Products" />
     </ListItem>
     </Link>
+    <Link to = "/dashboard/all-salt-benefits">
+    <ListItem button> 
+      <ListItemIcon>
+        <ShoppingCartIcon/> 
+      </ListItemIcon>
+      <ListItemText primary="All Salt Benefits" />
+    </ListItem>
+    </Link>
+    <Link to = "/dashboard/add-salt-benefits">
+    <ListItem button> 
+      <ListItemIcon>
+        <ShoppingCartIcon/> 
+      </ListItemIcon>
+      <ListItemText primary="Add Salt Benefits" />
+    </ListItem>
+    </Link>
   </div>
 );
