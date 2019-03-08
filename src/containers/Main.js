@@ -19,10 +19,11 @@ export default class Main extends Component {
             {
               (this.props.login) ? (
             <React.Fragment>
-            </React.Fragment>
+              <Route path = '/dashboard' component={Dashboard}/>
+              <Route exact path = '/' component={Dashboard}/>
+            </React.Fragment> 
               ) : (
                 <React.Fragment>
-                <Route  path = '/dashboard' component={Dashboard}/>
                 <Route exact path = '/' component={Login}/>
                 <Route  path = '/sign-in' component={Login}/>
                 </React.Fragment>

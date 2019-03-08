@@ -134,8 +134,7 @@ class SignIn extends Component {
     else {
       this.setState({ 
         error : false
-      })
-      post_request(api_base_url+'/admin/login',obj);    
+      })   
       this.props.submitHandler(obj);
     }
   }

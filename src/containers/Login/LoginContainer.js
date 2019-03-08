@@ -32,7 +32,7 @@ class LoginContainer extends Component {
         errorMessage : 'Email or Password is Incorrect !'
       })
     })
-  }
+  } 
 
   render() {
     return (

@@ -1,11 +1,9 @@
 import { LOGGEDIN, LOGGED_OUT } from "../actions/root.action";
 
 const INITIAL_STATE = {
-    name : '',
     email : '',
-    time : '',
-    uuid : '',
-    is_login : false
+    is_login : false,
+    token : ''
 } 
 
 export default (state = INITIAL_STATE, action) => {
@@ -13,10 +11,8 @@ export default (state = INITIAL_STATE, action) => {
         case LOGGEDIN:
         return({
             ...state,
-            name : action.payload.name,
-            email : action.payload.email,
-            time : action.payload.time,
-            uuid : action.payload.uid,
+            email : action.payload.user.email,
+            token : action.payload.token,
             is_login : true
         })
         case LOGGED_OUT:

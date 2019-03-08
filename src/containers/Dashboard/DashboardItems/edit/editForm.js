@@ -128,6 +128,7 @@ class EventForm extends React.Component {
           })
         }else{
           let obj = {
+            "x-access-token" : this.props.token,
              title : stateObj.title,
       description : stateObj.description,
       price : stateObj.price,
@@ -361,7 +362,8 @@ EventForm.propTypes = {
 function mapStateToProp(state) {
   console.log(state.productReducer.edit_obj)
   return ({
-    edit_obj : state.productReducer.edit_obj
+    edit_obj : state.productReducer.edit_obj,
+    token : state.user_reducer.token
   })
 }
   
