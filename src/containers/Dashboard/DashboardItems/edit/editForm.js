@@ -18,6 +18,8 @@ import Progress from '../../../../components/shared/CircularProgress';
 import history from '../../../../config/history';
 import ConfirmationDialog from '../../../../components/shared/ConfirmationDialog';
 import { Link } from '@material-ui/core';
+import { put_request } from '../../../../utils/helper';
+import { api_base_url } from '../../../../config/api-configuration';
 
 
      
@@ -98,43 +100,32 @@ class EventForm extends React.Component {
         // [name]: value,
         // });
       }
-      submitHandler = () =>{
+      submitHandler = (id) =>{
          console.log(this.state)
-    //     this.setState({
-    //       loader : true
-    //     })
-    //     const stateObj = this.state;
-    //     if(stateObj.title === '' || stateObj.description === '' || stateObj.images.length === 0)
-    //     {
-    //       alert('Some Fields Are Missing')
-    //       this.setState({
-    //         loader : false
-    //       })
-    //     }else{
-    //       let obj = {
-    //          title : stateObj.title,
-    //   description : stateObj.description,
-    //   price : stateObj.price,
-    //   short_title_description : stateObj.short_title_description,
-    //   category : stateObj.category,
-    //   color : stateObj.color,
-    //   product_images : stateObj.images 
-    //       }
-    //         post_request(api_base_url + '/admin/product', obj)
-    //         .then((res) => {
-    //           this.setState({
-    //               title : '',
-    //               description : '',
-    //               price : '',
-    //               short_title_description : '',
-    //               category : '',
-    //               color : [],
-    //               product_images : [],
-    //               dialogOpen : true
-    //           })
-    //         })
-    //       .catch(err => console.log(err))
-    //     }
+        //  let stateObj=this.state;
+        this.setState({
+          loader : true
+        })
+        const stateObj = this.state;
+        if(stateObj.title === '' || stateObj.description === '' || stateObj.images.length === 0)
+        {
+          alert('Some Fields Are Missing')
+          this.setState({
+            loader : false
+          })
+        }else{
+          let obj = {
+             title : stateObj.title,
+      description : stateObj.description,
+      price : stateObj.price,
+      short_title_description : stateObj.short_title_description,
+      category : stateObj.category,
+      color : stateObj.color,
+      product_images : stateObj.images 
+          }
+        put_request(api_base_url+"/admin/product"+id,obj)
+          
+        }
       }
     
     
