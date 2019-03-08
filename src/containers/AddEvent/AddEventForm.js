@@ -69,7 +69,7 @@ colorHandler = (value, selected) => {
   short_title_description : stateObj.short_title_description,
   category : stateObj.category,
   color : stateObj.color,
-  product_images : stateObj.images 
+  images : stateObj.images 
       }
         post_request(api_base_url + '/admin/product', obj)
         .then((res) => {
@@ -80,7 +80,7 @@ colorHandler = (value, selected) => {
               short_title_description : '',
               category : '',
               color : [],
-              product_images : [],
+              images : [], 
               dialogOpen : true
           })
         })
