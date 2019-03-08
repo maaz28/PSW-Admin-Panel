@@ -27,17 +27,14 @@ then((res)=>{
   componentDidMount () {
     get_request(api_base_url + "/products")
     .then((res) => {
+      console.log(res.data.result)
       this.setState({
-        // product : res.data.result
+        product : res.data.result
       })
-      // this.setState({
-      //   products : res.data.result
-      // })
     })
   }
    
   render() {
-    const { classes } = this.props;
     return (
 
       <div className="App">
@@ -49,7 +46,7 @@ then((res)=>{
       <CardActionArea>
         <CardMedia
           style = {{ height: 0, paddingTop: '80%'}}
-          image= {item.product_images[0]}
+          image= {item.images[0]}
           title={item.title}
         />
         <CardContent>
@@ -71,7 +68,7 @@ then((res)=>{
           Delete
         </Button>
       </CardActions>
-    </Card>     
+    </Card>      
         </Grid>
             ))
         }
