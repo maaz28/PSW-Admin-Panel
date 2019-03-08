@@ -188,12 +188,8 @@ class Dashboard extends React.Component {
         <Router history={history}>
         <div> 
         <Route exact path = '/dashboard/add-product' component={Add}/>
-<<<<<<< HEAD
-        <Route exact path = '/dashboard/all-products' component={All}/>z
-=======
         <Route exact path = '/dashboard/all-products' component={All}/>
         <Route exact path = '/dashboard/edit-form' component={editForm}/>
->>>>>>> 337b516853d6f61db8e34663cde13d814bb9a80e
         </div>
         </Router>
         </main>
