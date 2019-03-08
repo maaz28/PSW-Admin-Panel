@@ -55,8 +55,17 @@ class EventForm extends React.Component {
         desc_err : false,
         formatted_address_short_err : false,
         titleHelperText : '',
-        category : ''
+        category : '',
+        title : '', 
+        description : '',
+        price : '',
+        short_title_description : '',
+        category : '',
+        color : [],
+        images : [],
+        dialogOpen : false
     }
+
     colorHandler = (value, selected) => {
         let arr = this.state.color;
       if (selected) {
@@ -139,6 +148,9 @@ class EventForm extends React.Component {
       }
   handleChange = name => event => {
       console.log(name, event.target.value)
+      this.setState({
+        [name] : event.target.value
+      })
     //   this.props.onChangeParentHandler(name, event.target.value);
   };
 
@@ -150,6 +162,7 @@ class EventForm extends React.Component {
 
   handleSelectChange = name => event => {
     console.log(event.target.value, event.target.checked, event.target.selected);
+    this.colorHandler(event.target.value,event.target.checked);
     // this.props.colorHandler(event.target.value, event.target.checked);
   };
 
