@@ -17,10 +17,9 @@ import Button from '@material-ui/core/Button';
 import Progress from '../../../../components/shared/CircularProgress';
 import history from '../../../../config/history';
 import ConfirmationDialog from '../../../../components/shared/ConfirmationDialog';
-import { Link } from '@material-ui/core';
 import { put_request } from '../../../../utils/helper';
 import { api_base_url } from '../../../../config/api-configuration';
-
+import {connect} from 'react-redux';
 
      
 
@@ -66,6 +65,20 @@ class EventForm extends React.Component {
         color : [],
         images : [],
         dialogOpen : false
+    }
+
+    componentWillReceiveProps () {
+      let edit_obj = this.props.edit_obj
+      this.setState ({
+        category : edit_obj.category,
+        title : edit_obj.title, 
+        description : edit_obj.description,
+        price : edit_obj.price,
+        short_title_description : edit_obj.short_title_description,
+        category : edit_obj.category,
+        color : edit_obj.color,
+        images : edit_obj.images
+    })
     }
 
     colorHandler = (value, selected) => {
@@ -345,4 +358,11 @@ EventForm.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(EventForm);
+function mapStateToProp(state) {
+  console.log(state.productReducer.edit_obj)
+  return ({
+    edit_obj : state.productReducer.edit_obj
+  })
+}
+  
+export default connect(mapStateToProp, null)(withStyles(styles)(EventForm));

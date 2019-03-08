@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import ProductCardView from '../../../../components/shared/card'
 import Grid from '@material-ui/core/Grid';
 import {get_request, delete_request} from '../../../../utils/helper'
 import {api_base_url} from '../../../../config/api-configuration'
 import { CardActions, Button, Typography, CardContent, CardMedia, CardActionArea, Card} from '@material-ui/core';
- import {Link} from 'react-router-dom'
+import history from '../../../../config/history';
+import {connect} from 'react-redux';
+import { EDIT_OBJ_DATA } from '../../../../redux/actions/root.action';
+
 
 class All extends Component {
   state = {
@@ -20,8 +22,9 @@ then((res)=>{
 )
   }
 
-  editBtnHanlder=()=>{
-
+  editBtnHanlder=(data)=>{
+    this.props.EDIT_OBJ_DATA(data)
+    history.push('/dashboard/edit-form');
   }
  
   componentDidMount () {
@@ -59,11 +62,11 @@ then((res)=>{
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Link to='/dashboard/edit-form'>
-        <Button size="small" color="primary" onClick={this.editBtnHanlder}>
+        {/* <Link to='/dashboard/edit-form'> */}
+        <Button size="small" color="primary" onClick={ () => {this.editBtnHanlder(item)} }>
           Edit
         </Button>
-        </Link>
+        {/* </Link> */}
         <Button size="small" color="primary" onClick={() => {this.deleteBtnHandler(item._id)} }>
           Delete
         </Button>
@@ -79,6 +82,14 @@ then((res)=>{
   }
 }
 
+function mapDispatchToProp(dispatch) {
+	return ({
+		EDIT_OBJ_DATA : (data) => {
+			dispatch(EDIT_OBJ_DATA(data));
+		}
+	})
+}
 
 
-export default (All);
+
+export default connect(null, mapDispatchToProp)(All);
