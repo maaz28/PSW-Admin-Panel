@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {validEmail, validPassword} from '../utils/helper.js'
+import {validEmail, validPassword, post_request} from '../utils/helper.js'
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -15,6 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import {Link} from 'react-router-dom'
+import { api_base_url } from "../config/api-configuration.js";
 
 const styles = theme => ({
   main: {
@@ -115,16 +116,26 @@ class SignIn extends Component {
       email : this.state.email,
       password : this.state.password
     }
-    if((obj.email === "" || obj.password === "" || this.state.errorEmail || this.state.errorPassword)){
+    console.log(obj);
+    
+    if((obj.email === "" || obj.password === "" )){
       this.setState({
         error : true,
         errorMessage : 'All the fields are required!'
       })
     }
+    else if(this.state.errorEmail || this.state.errorPassword){
+    console.log("Email or Password is incorrect")
+    this.setState({
+    error:true,
+     errorMessage:'Email or Password is incorrect'
+     })
+     }
     else {
       this.setState({ 
         error : false
       })
+      post_request(api_base_url+'/admin/login',obj);    
       this.props.submitHandler(obj);
     }
   }
