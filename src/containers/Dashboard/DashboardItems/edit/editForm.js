@@ -20,6 +20,7 @@ import ConfirmationDialog from '../../../../components/shared/ConfirmationDialog
 import { put_request } from '../../../../utils/helper';
 import { api_base_url } from '../../../../config/api-configuration';
 import {connect} from 'react-redux';
+import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined'; 
 
      
 
@@ -65,21 +66,20 @@ class EventForm extends React.Component {
         color : [],
         images : [],
         dialogOpen : false,
-        checked : {
-          pink : false,
-          red : false,
-          white : false,
-          black : false
-        }
+        // checked : {
+        //   pink : false,
+        //   red : false,
+        //   white : false,
+        //   black : false
+        // }
     }
 
     componentDidMount () { 
       let edit_obj = this.props.edit_obj;
-      let checkedBoxes = this.state.checked;
-      for(var i=0; i<edit_obj.color.length; i++){
-        checkedBoxes[edit_obj.color[i]] = true
+      let imagesArr = edit_obj.images;
+      for(var i=edit_obj.images.length; i<3; i++){
+          imagesArr[i] = ""
       }
-  console.log(checkedBoxes, edit_obj.color)
       this.setState ({
         category : edit_obj.category,
         title : edit_obj.title, 
@@ -88,8 +88,7 @@ class EventForm extends React.Component {
         short_title_description : edit_obj.short_title_description,
         category : edit_obj.category,
         color : edit_obj.color,
-        images : edit_obj.images,
-        checked : checkedBoxes
+        images : imagesArr
     })
     }
 
@@ -125,14 +124,14 @@ class EventForm extends React.Component {
         // [name]: value,
         // });
       }
+
       submitHandler = (id) =>{
-         console.log(this.state)
-        //  let stateObj=this.state;
+         console.log(id)
         this.setState({
           loader : true
         })
         const stateObj = this.state;
-        if(stateObj.title === '' || stateObj.description === '' || stateObj.images.length === 0)
+        if(stateObj.title === '' || stateObj.description === '' )
         {
           alert('Some Fields Are Missing')
           this.setState({
@@ -147,9 +146,11 @@ class EventForm extends React.Component {
       short_title_description : stateObj.short_title_description,
       category : stateObj.category,
       color : stateObj.color,
-      product_images : stateObj.images 
+      product_images : stateObj.images,
+      rating : 5
           }
-        put_request(api_base_url+"/admin/product"+id,obj)
+          console.log(obj);
+        put_request(api_base_url + "/admin/product/" + id, obj)
           
         }
       }
@@ -163,6 +164,7 @@ class EventForm extends React.Component {
           images : arr
         })
       }
+
   handleChange = name => event => {
       console.log(name, event.target.value)
       this.setState({
@@ -177,34 +179,6 @@ class EventForm extends React.Component {
     //   this.props.onChangeParentHandler("category", event.target.value);
   };
 
-  handleSelectChange = name => event => {
-    console.log(event.target.value, event.target.checked, event.target.selected);
-    this.colorHandler(event.target.value,event.target.checked);
-    let arr = this.state.color;
-    let checkedBoxes = this.state.checked;
-
-  if (event.target.checked) {
-    arr.push(event.target.value);
-    checkedBoxes[event.target.value] = true;
-    this.setState({
-      color : arr,
-      checked : checkedBoxes
-    })
-  }
-  else {
-    let ind = arr.indexOf(event.target.value);
-    console.log(ind,arr)
-    if(ind !== -1) {
-      arr.splice(ind, 1);
-    checkedBoxes[event.target.value] = false;
-      this.setState({
-        color : arr,
-      checked : checkedBoxes
-      })
-    } 
-  }
-    // this.props.colorHandler(event.target.value, event.target.checked);
-  };
 
   titleErrHandler = (ev) => {
     console.log(ev.target.value);
@@ -220,6 +194,15 @@ class EventForm extends React.Component {
         titleHelperText : 'Title is longer than 40 characters'
       })
     }
+  }
+
+  deleteBtnHandler = (value) => {
+    let arr = this.state.images;
+    let ind = arr.indexOf(value);
+    arr.splice(ind, 1);
+    this.setState({
+      images : arr
+    })
   }
 
 
@@ -245,7 +228,6 @@ class EventForm extends React.Component {
           />
         <TextField
         // onBlur ={this.titleErrHandler}
-        
         error = {this.state.desc_err}
           required
           fullWidth
@@ -299,18 +281,18 @@ class EventForm extends React.Component {
             <MenuItem> 
               <em>None</em>
             </MenuItem>
-            <MenuItem value={"natural_salt_lamp"}>Natural Salt Lamps</MenuItem>
-            <MenuItem value={"crafted_salt_lamp"}>Crafted Salt Lamps</MenuItem>
-            <MenuItem value={"aroma_salt_lamp"}>Aroma Salt Lamps</MenuItem>
-            <MenuItem value={"usb_salt_lamp"}>USB Salt Lamps</MenuItem>
-            <MenuItem value={"iron_Salt_basket"}>Iron Salt Baskets</MenuItem>
-            <MenuItem value={"wooden_salt_basket"}>WoodenSalt Baskets</MenuItem>
-            <MenuItem value={"night_light_lamp"}>Night Light Lamps</MenuItem>
-            <MenuItem value={"edible_salt"}>Edible Salts</MenuItem>
-            <MenuItem value={"animal_lick_salt"}>Animal Lick Salt</MenuItem>
-            <MenuItem value={"salt_tile"}>Salt Tiles</MenuItem>
-            <MenuItem value={"candle_holder"}>Candel Holders</MenuItem>
-            <MenuItem value={"health_care_product"}>Health Care Products</MenuItem>
+            <MenuItem value={"Natural-Salt-Lamp"}>Natural Salt Lamps</MenuItem>
+            <MenuItem value={"Crafted-Salt-Lamp"}>Crafted Salt Lamps</MenuItem>
+            <MenuItem value={"Aroma-Salt-Lamp"}>Aroma Salt Lamps</MenuItem>
+            <MenuItem value={"USB-Salt-Lamp"}>USB Salt Lamps</MenuItem>
+            <MenuItem value={"Iron-Salt-Baskets"}>Iron Salt Baskets</MenuItem>
+            <MenuItem value={"Wooden-Salt-Baskets"}>WoodenSalt Baskets</MenuItem>
+            <MenuItem value={"Night-Light-Lamp"}>Night Light Lamps</MenuItem>
+            <MenuItem value={"Edible-Salt"}>Edible Salts</MenuItem>
+            <MenuItem value={"Animal-Lick-Salt"}>Animal Lick Salt</MenuItem>
+            <MenuItem value={"Salt-Tiles"}>Salt Tiles</MenuItem>
+            <MenuItem value={"Candle-Holders"}>Candel Holders</MenuItem>
+            <MenuItem value={"Health-Care-Products"}>Health Care Products</MenuItem>
           </Select>
           </FormControl>
 
@@ -320,30 +302,29 @@ class EventForm extends React.Component {
           <FormGroup>   
             <FormControlLabel
               control={
-                <Checkbox checked = {this.state.checked.red}  onChange={this.handleSelectChange('red')} value="red" />
+                <Checkbox onChange={this.colorHandler('red')} value="red" />
               }
               label="Red Color"
             />
             <FormControlLabel
               control={
-                <Checkbox checked = {this.state.checked.pink} onChange={this.handleSelectChange('pink')} value="pink" />
+                <Checkbox onChange={this.colorHandler('pink')} value="pink" />
               }
               label="Pink Color"
             />
             <FormControlLabel
               control={
-                <Checkbox checked = {this.state.checked.white} onChange={this.handleSelectChange('white')} value="white"/>
+                <Checkbox onChange={this.colorHandler('white')} value="white"/>
               }
               label="White Color"
             />
             <FormControlLabel
               control={
-                <Checkbox checked = {this.state.checked.black} onChange={this.handleSelectChange('black')} value="black"/>
+                <Checkbox onChange={this.colorHandler('black')} value="black"/>
               }
               label="Black Color"
             />
           </FormGroup>
-          {/* <FormHelperText>Be careful</FormHelperText> */}
         </FormControl>
 
 
@@ -353,22 +334,34 @@ class EventForm extends React.Component {
       <div>
       <h4 className = "title">Product Images</h4>
       <Grid container spacing={24}>
-        <Grid item xs={4}>
+      {
+        this.state.images.map((item, i) => (
+        <Grid item xs={4}>  
+        {
+          (item !== "") ? (
+          <div style={{ backgroundImage: 'url(' + item + ')', backgroundSize : 'cover', backgroundPosition : 'center', backgroundRepeat : 'no-repeat', width : '100px', height : '100px' }}>
+          <DeleteOutlinedIcon title = "Delete" style = {{color : 'red', cursor : 'pointer'}} onClick = {this.deleteBtnHandler}/>          
+          </div>
+          ) : (
       <ImageUploader urlHandler = {this.urlHandler}/>
-        </Grid>
-        <Grid item xs={4}>
+          )
+        }        
+        </Grid>           
+        ))
+      }
+        {/* <Grid item xs={4}>
       <ImageUploader urlHandler = {this.urlHandler}/>              
         </Grid>
         <Grid item xs={4}>
       <ImageUploader urlHandler = {this.urlHandler}/>              
-        </Grid>
+        </Grid> */}
       </Grid>
       </div>
       <div>
       <Grid container spacing={24}>
           <Grid item xs={2}>
           <div style={{display:'inline-flex'}}>
-      <Button variant="contained" color="primary" style = {{marginTop : '20px',marginRight:'8px'}} label="Submit" primary={true} onClick = {this.submitHandler}>
+      <Button variant="contained" color="primary" style = {{marginTop : '20px',marginRight:'8px'}} label="Submit" primary={true} onClick = {() => {this.submitHandler(this.props.edit_obj._id)} }>
         Submit
       </Button>
       {/* <Link to='/dashboard/all-products'>
@@ -400,7 +393,7 @@ EventForm.propTypes = {
 };
 
 function mapStateToProp(state) {
-  console.log(state.user_reducer.token)
+  console.log(state.productReducer.edit_obj)
   return ({
     edit_obj : state.productReducer.edit_obj,
     token : state.user_reducer.token
