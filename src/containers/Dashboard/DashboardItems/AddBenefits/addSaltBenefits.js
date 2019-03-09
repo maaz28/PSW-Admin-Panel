@@ -63,9 +63,28 @@ class AddSaltBenefits extends React.Component {
         images : [],
         dialogOpen : false,
         paragraph:'',
-        img_url:''
+        img_url:'',
+        Benefits:['hello']
     }
 
+
+    // handleText = i => e => {
+    //   let Benefits = [...this.state.Benefits]
+    //   Benefits[i] = e.target.value
+    //   this.setState({
+    //     Benefits
+    //   })
+    // }
+  
+    
+  
+    addBenefits = e => {
+      e.preventDefault()
+      let Benefits = this.state.Benefits.concat([''])
+      this.setState({
+        Benefits
+      })
+    }
     
 
     
@@ -201,7 +220,11 @@ class AddSaltBenefits extends React.Component {
           <hr/>
         <h3>Benefits</h3>
         <div>
-
+        <div>
+        {this.state.Benefits.map((question, index) => (
+          <span key={index}>
+            
+            <div>
         <TextField
         // onBlur ={this.titleErrHandler}
         
@@ -245,7 +268,13 @@ class AddSaltBenefits extends React.Component {
           margin="normal" 
          onChange = {this.handleChange('img_url')}
         />
-        <Button variant="contained" color="primary" style = {{marginTop : '20px',marginRight:'8px',display:'block'}} label="Add-More" primary={true} >
+        <hr/>
+        </div>
+            
+          </span>
+        ))}
+        </div>
+        <Button variant="contained" color="primary" onClick={this.addBenefits} style = {{marginTop : '20px',marginRight:'8px',display:'block'}} label="Add-More" primary={true} >
         Add More 
       </Button>
 
@@ -276,6 +305,7 @@ class AddSaltBenefits extends React.Component {
       </Grid>
         <ConfirmationDialog closePopupHandler = {this.closePopupHandler} open = {this.state.dialogOpen} title = "Product Successfully Added" preview = "/dashboard"/>
       </div>
+
       
       </div>
       
