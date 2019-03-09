@@ -17,4 +17,4 @@ import 'firebase/storage';
   export const auth = firebase.auth();
   export const db = firebase.database();
   export const storage = firebase.storage();
-  export const api_base_url = "http://192.168.0.116:7001";
+  export const api_base_url = "http://localhost:7001";

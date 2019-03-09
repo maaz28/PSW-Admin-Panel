@@ -17,6 +17,7 @@ export default class Main extends Component {
             <React.Fragment>
               <div>
             {
+              
               (this.props.login) ? (
             <React.Fragment>
               <Route path = '/dashboard' component={Dashboard}/>

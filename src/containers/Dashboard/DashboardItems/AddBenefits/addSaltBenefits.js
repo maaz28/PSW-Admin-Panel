@@ -55,16 +55,15 @@ class AddSaltBenefits extends React.Component {
         title_err : false,
         desc_err : false,
         formatted_address_short_err : false,
-        titleHelperText : '',
-        category : '',
+        sub_title : '',
+        heading : '',
         title : '', 
         description : '',
-        price : '',
-        short_title_description : '',
-        category : '',
-        color : [],
+        short_description : '',
         images : [],
-        dialogOpen : false
+        dialogOpen : false,
+        paragraph:'',
+        img_url:''
     }
 
     
@@ -80,9 +79,9 @@ class AddSaltBenefits extends React.Component {
     
       onChangeParentHandler = (name ,value) => {
         console.log(name, value)
-        // this.setState({
-        // [name]: value,
-        // });
+        this.setState({
+        [name]: value,
+        });
       }
       submitHandler = (id) =>{
          console.log(this.state)
@@ -123,6 +122,12 @@ class AddSaltBenefits extends React.Component {
           images : arr
         })
       }
+      handleChange = name => event => {
+        console.log(name,event.target.value)
+        this.setState({
+          [name]: event.target.value,
+        });
+      };
 
   render() {
     const { classes } = this.props;
@@ -142,7 +147,7 @@ class AddSaltBenefits extends React.Component {
           className={classes.textField}
         
           margin="normal" 
-        //   onChange = {this.handleChange('description')}
+           onChange = {this.handleChange('title')}
         />
         <TextField
         // onBlur ={this.titleErrHandler}
@@ -157,7 +162,7 @@ class AddSaltBenefits extends React.Component {
         //   rowsMax="3"   
         //   rows="3"
           margin="normal" 
-        //   onChange = {this.handleChange('description')}
+          onChange = {this.handleChange('sub_title')}
         />
         <TextField
         // onBlur ={this.titleErrHandler}
@@ -172,7 +177,7 @@ class AddSaltBenefits extends React.Component {
           rowsMax="2"   
         //   rows="3"
           margin="normal" 
-        //   onChange = {this.handleChange('description')}
+           onChange = {this.handleChange('short_description')}
         />
         
         
@@ -208,7 +213,7 @@ class AddSaltBenefits extends React.Component {
           className={classes.textField}
         
           margin="normal" 
-        //   onChange = {this.handleChange('description')}
+           onChange = {this.handleChange('heading')}
         />
         <TextField
         // onBlur ={this.titleErrHandler}
@@ -223,7 +228,7 @@ class AddSaltBenefits extends React.Component {
         //   rowsMax="3"   
         //   rows="3"
           margin="normal" 
-        //   onChange = {this.handleChange('description')}
+           onChange = {this.handleChange('paragraph')}
         />
         <TextField
         // onBlur ={this.titleErrHandler}
@@ -238,10 +243,10 @@ class AddSaltBenefits extends React.Component {
         //   rowsMax="3"   
         //   rows="3"
           margin="normal" 
-        //   onChange = {this.handleChange('description')}
+         onChange = {this.handleChange('img_url')}
         />
         <Button variant="contained" color="primary" style = {{marginTop : '20px',marginRight:'8px',display:'block'}} label="Add-More" primary={true} >
-        Add 
+        Add More 
       </Button>
 
         </div>
