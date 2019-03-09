@@ -64,11 +64,22 @@ class EventForm extends React.Component {
         category : '',
         color : [],
         images : [],
-        dialogOpen : false
+        dialogOpen : false,
+        checked : {
+          pink : false,
+          red : false,
+          white : false,
+          black : false
+        }
     }
 
-    componentWillReceiveProps () {
-      let edit_obj = this.props.edit_obj
+    componentDidMount () { 
+      let edit_obj = this.props.edit_obj;
+      let checkedBoxes = this.state.checked;
+      for(var i=0; i<edit_obj.color.length; i++){
+        checkedBoxes[edit_obj.color[i]] = true
+      }
+  console.log(checkedBoxes, edit_obj.color)
       this.setState ({
         category : edit_obj.category,
         title : edit_obj.title, 
@@ -77,7 +88,8 @@ class EventForm extends React.Component {
         short_title_description : edit_obj.short_title_description,
         category : edit_obj.category,
         color : edit_obj.color,
-        images : edit_obj.images
+        images : edit_obj.images,
+        checked : checkedBoxes
     })
     }
 
@@ -168,6 +180,29 @@ class EventForm extends React.Component {
   handleSelectChange = name => event => {
     console.log(event.target.value, event.target.checked, event.target.selected);
     this.colorHandler(event.target.value,event.target.checked);
+    let arr = this.state.color;
+    let checkedBoxes = this.state.checked;
+
+  if (event.target.checked) {
+    arr.push(event.target.value);
+    checkedBoxes[event.target.value] = true;
+    this.setState({
+      color : arr,
+      checked : checkedBoxes
+    })
+  }
+  else {
+    let ind = arr.indexOf(event.target.value);
+    console.log(ind,arr)
+    if(ind !== -1) {
+      arr.splice(ind, 1);
+    checkedBoxes[event.target.value] = false;
+      this.setState({
+        color : arr,
+      checked : checkedBoxes
+      })
+    } 
+  }
     // this.props.colorHandler(event.target.value, event.target.checked);
   };
 
@@ -194,7 +229,7 @@ class EventForm extends React.Component {
     return (
         <div>
       <form className={classes.container} noValidate autoComplete="off">
-        <TextField
+        <TextField 
           onBlur ={this.titleErrHandler}
           error = {this.state.title_err}
           helperText = {this.state.titleHelperText}
@@ -206,7 +241,7 @@ class EventForm extends React.Component {
           margin="normal"
           placeholder = "Natural Salt Lamp | Best Quality"
           onChange = {this.handleChange('title')}
-          value={this.props.edit_obj.title}
+          value={this.state.title}
           />
         <TextField
         // onBlur ={this.titleErrHandler}
@@ -221,7 +256,7 @@ class EventForm extends React.Component {
           rowsMax="2"   
           margin="normal" 
           onChange = {this.handleChange('description')}
-          value={this.props.edit_obj.description}
+          value={this.state.description}
         />
         
 
@@ -237,7 +272,7 @@ class EventForm extends React.Component {
           margin="normal"
           placeholder = "short Description"
           onChange = {this.handleChange('short_title_description')}
-          value={this.props.edit_obj.short_title_description}
+          value={this.state.short_title_description}
           />
         <TextField 
         // onBlur ={this.titleErrHandler}
@@ -251,14 +286,14 @@ class EventForm extends React.Component {
           margin="normal"
           placeholder = "20000"
           onChange = {this.handleChange('price')}
-          value={this.props.edit_obj.price}
+          value={this.state.price}
         />
 
 
             <FormControl className={classes.formControl}  style={{width:'50%'}}>      
          <InputLabel htmlFor="age-simple">Category</InputLabel>
           <Select 
-            value= {this.props.edit_obj.category}
+            value= {this.state.category}
             onChange={this.handleDropDownChange}
           >
             <MenuItem> 
@@ -285,25 +320,25 @@ class EventForm extends React.Component {
           <FormGroup>   
             <FormControlLabel
               control={
-                <Checkbox  onChange={this.handleSelectChange('red')} value="red" />
+                <Checkbox checked = {this.state.checked.red}  onChange={this.handleSelectChange('red')} value="red" />
               }
               label="Red Color"
             />
             <FormControlLabel
               control={
-                <Checkbox  onChange={this.handleSelectChange('pink')} value="pink" />
+                <Checkbox checked = {this.state.checked.pink} onChange={this.handleSelectChange('pink')} value="pink" />
               }
               label="Pink Color"
             />
             <FormControlLabel
               control={
-                <Checkbox onChange={this.handleSelectChange('white')} value="white"/>
+                <Checkbox checked = {this.state.checked.white} onChange={this.handleSelectChange('white')} value="white"/>
               }
               label="White Color"
             />
             <FormControlLabel
               control={
-                <Checkbox onChange={this.handleSelectChange('black')} value="black"/>
+                <Checkbox checked = {this.state.checked.black} onChange={this.handleSelectChange('black')} value="black"/>
               }
               label="Black Color"
             />
@@ -365,7 +400,7 @@ EventForm.propTypes = {
 };
 
 function mapStateToProp(state) {
-  console.log(state.productReducer.edit_obj)
+  console.log(state.user_reducer.token)
   return ({
     edit_obj : state.productReducer.edit_obj,
     token : state.user_reducer.token

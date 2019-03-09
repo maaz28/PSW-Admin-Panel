@@ -136,18 +136,18 @@ class EventForm extends React.Component {
             <MenuItem> 
               <em>None</em>
             </MenuItem>
-            <MenuItem value={"natural_salt_lamp"}>Natural Salt Lamps</MenuItem>
-            <MenuItem value={"crafted_salt_lamp"}>Crafted Salt Lamps</MenuItem>
-            <MenuItem value={"aroma_salt_lamp"}>Aroma Salt Lamps</MenuItem>
-            <MenuItem value={"usb_salt_lamp"}>USB Salt Lamps</MenuItem>
-            <MenuItem value={"iron_Salt_basket"}>Iron Salt Baskets</MenuItem>
-            <MenuItem value={"wooden_salt_basket"}>WoodenSalt Baskets</MenuItem>
-            <MenuItem value={"night_light_lamp"}>Night Light Lamps</MenuItem>
-            <MenuItem value={"edible_salt"}>Edible Salts</MenuItem>
-            <MenuItem value={"animal_lick_salt"}>Animal Lick Salt</MenuItem>
-            <MenuItem value={"salt_tile"}>Salt Tiles</MenuItem>
-            <MenuItem value={"candle_holder"}>Candel Holders</MenuItem>
-            <MenuItem value={"health_care_product"}>Health Care Products</MenuItem>
+            <MenuItem value={"Natural-Salt-Lamp"}>Natural Salt Lamps</MenuItem>
+            <MenuItem value={"Crafted-Salt-Lamp"}>Crafted Salt Lamps</MenuItem>
+            <MenuItem value={"Aroma-Salt-Lamp"}>Aroma Salt Lamps</MenuItem>
+            <MenuItem value={"USB-Salt-Lamp"}>USB Salt Lamps</MenuItem>
+            <MenuItem value={"Iron-Salt-Baskets"}>Iron Salt Baskets</MenuItem>
+            <MenuItem value={"Wooden-Salt-Baskets"}>WoodenSalt Baskets</MenuItem>
+            <MenuItem value={"Night-Light-Lamp"}>Night Light Lamps</MenuItem>
+            <MenuItem value={"Edible-Salt"}>Edible Salts</MenuItem>
+            <MenuItem value={"Animal-Lick-Salt"}>Animal Lick Salt</MenuItem>
+            <MenuItem value={"Salt-Tiles"}>Salt Tiles</MenuItem>
+            <MenuItem value={"Candle-Holders"}>Candel Holders</MenuItem>
+            <MenuItem value={"Health-Care-Products"}>Health Care Products</MenuItem>
           </Select>
           </FormControl>
 

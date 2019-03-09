@@ -63,13 +63,15 @@ colorHandler = (value, selected) => {
       })
     }else{
       let obj = {
+            "x-access-token" : this.props.token,
          title : stateObj.title,
   description : stateObj.description,
   price : stateObj.price,
   short_title_description : stateObj.short_title_description,
   category : stateObj.category,
   color : stateObj.color,
-  images : stateObj.images 
+  images : stateObj.images,
+  rating : 5 
       }
         post_request(api_base_url + '/admin/product', obj)
         .then((res) => {
@@ -151,7 +153,8 @@ function mapStateToProp(state) {
   return ({
     name : state.user_reducer.name,
     email : state.user_reducer.email,
-    password : state.user_reducer.password
+    password : state.user_reducer.password,
+    token : state.user_reducer.token
   })
 }
 
