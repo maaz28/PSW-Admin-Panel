@@ -26,6 +26,8 @@ import All from './DashboardItems/All'
 import { List } from '@material-ui/core';
 import { Z_FIXED } from 'zlib';
 import editForm from './DashboardItems/edit/editForm';
+import AddSaltBenefits from './DashboardItems/AddBenefits/addSaltBenefits';
+import AllSaltBenefits from './DashboardItems/AllBenefits/allSaltBenefits';
 
 
 const drawerWidth = 240;
@@ -190,6 +192,8 @@ class Dashboard extends React.Component {
         <Route exact path = '/dashboard/add-product' component={Add}/>
         <Route exact path = '/dashboard/all-products' component={All}/>
         <Route exact path = '/dashboard/edit-form' component={editForm}/>
+        <Route exact path = '/dashboard/add-salt-benefits' component={AddSaltBenefits}/>
+        <Route exact path = '/dashboard/all-salt-benefits' component={AllSaltBenefits}/>
         </div>
         </Router>
         </main>
