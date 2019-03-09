@@ -15,11 +15,21 @@ class All extends Component {
 
   deleteBtnHandler= (id)=>{
 console.log("delete")
-delete_request(api_base_url+"/admin/product/"+id).
+console.log(this.state.product,'before')
+// console.log(this.state.product.map(function(e) { return e._id; }).indexOf(id))
+let pos = this.state.product.map(function(e) { return e._id; }).indexOf(id);
+let arr=this.state.product;
+delete_request(api_base_url+"/admin/product/"+id, {'x-access-token' : this.props.token}).
 then((res)=>{
-  console.log(res)
+  console.log(res);
+  
 }
 )
+arr.splice(pos,1);
+this.setState({
+  product:arr
+})
+console.log(this.state.product,"after")
   }
 
   editBtnHanlder=(data)=>{
@@ -90,6 +100,11 @@ function mapDispatchToProp(dispatch) {
 	})
 }
 
+function mapStateToProp(state) {
+  console.log(state.user_reducer.token)
+  return ({
+    token : state.user_reducer.token
+  })
+}
 
-
-export default connect(null, mapDispatchToProp)(All);
+export default connect(mapStateToProp, mapDispatchToProp)(All);
