@@ -393,7 +393,7 @@ EventForm.propTypes = {
 };
 
 function mapStateToProp(state) {
-  console.log(state.productReducer.edit_obj)
+  console.log(state.productReducer.edit_obj, state.user_reducer.token)
   return ({
     edit_obj : state.productReducer.edit_obj,
     token : state.user_reducer.token

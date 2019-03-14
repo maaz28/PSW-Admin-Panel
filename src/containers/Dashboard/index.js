@@ -28,6 +28,10 @@ import { Z_FIXED } from 'zlib';
 import editForm from './DashboardItems/edit/editForm';
 import AddSaltBenefits from './DashboardItems/AddBenefits/addSaltBenefits';
 import AllSaltBenefits from './DashboardItems/AllBenefits/allSaltBenefits';
+import Youtube from './DashboardItems/Youtube';
+import Contact from './DashboardItems/Contact';
+import ContactEditForm from './DashboardItems/Contact/ContactEditForm';
+
 
 
 const drawerWidth = 240;
@@ -179,7 +183,7 @@ class Dashboard extends React.Component {
             <IconButton onClick={this.handleDrawerClose}>
               <ChevronLeftIcon />
             </IconButton>
-          </div>
+          </div> 
           <Divider />
           <List>{mainListItems}</List>
           <Divider />
@@ -192,11 +196,14 @@ class Dashboard extends React.Component {
         <Route exact path = '/dashboard/add-product' component={Add}/>
         <Route exact path = '/dashboard/all-products' component={All}/>
         <Route exact path = '/dashboard/edit-form' component={editForm}/>
-        <Route exact path = '/dashboard/add-salt-benefits' component={AddSaltBenefits}/>
-        <Route exact path = '/dashboard/all-salt-benefits' component={AllSaltBenefits}/>
+        <Route exact path = '/dashboard/youtube-url' component={Youtube}/>
+        <Route exact path = '/dashboard/contact-data' component={Contact}/>
+        <Route exact path = '/dashboard/contact-edit' component={ContactEditForm}/>
+        {/* <Route exact path = '/dashboard/add-salt-benefits' component={AddSaltBenefits}/>
+        <Route exact path = '/dashboard/all-salt-benefits' component={AllSaltBenefits}/> */}
         </div>
         </Router>
-        </main>
+        </main> 
         
       </div>
     );

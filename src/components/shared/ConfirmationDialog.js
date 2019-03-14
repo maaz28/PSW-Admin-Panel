@@ -62,13 +62,7 @@ class ConfirmationDialog extends React.Component {
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
             <img src = {img}/>
-        {/* <Grid container spacing={24}>
-        <Grid item xs={6}>
-        </Grid>
-        <Grid item xs={6}>
 
-        </Grid>
-        </Grid> */}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
