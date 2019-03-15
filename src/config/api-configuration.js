@@ -9,12 +9,12 @@ import 'firebase/storage';
     authDomain: "psw-admin-panel.firebaseapp.com",
     databaseURL: "https://psw-admin-panel.firebaseio.com",
     projectId: "psw-admin-panel",
-    storageBucket: "",
+    storageBucket: "psw-admin-panel.appspot.com",
     messagingSenderId: "946056660894"
   };
   firebase.initializeApp(config);
-
+  
   export const auth = firebase.auth();
   export const db = firebase.database();
   export const storage = firebase.storage();
-  export const api_base_url = "http://localhost:7001";
+  export const api_base_url = "http://psw-server.herokuapp.com"; 

@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "staging": "psw-admin-panel",
+    "default": "psw-admin-panel"
+  }
+}

@@ -14,21 +14,6 @@ class ImageUploader extends Component {
     progress: 0,
     avatarURL: "" 
   };
- 
-  // componentDidMount() {
-  //   console.log(this.props.url)
-  //   this.setState({ 
-  //     avatarURL : this.props.url
-  //   })
-  // }
-
-  componentWillReceiveProps(nextProps) {
-        console.log(nextProps.url)
-    this.setState({ 
-      avatarURL : nextProps.url
-    })
-  }
-  
   
 
   handleChangeUsername = event => this.setState({ username: event.target.value });

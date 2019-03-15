@@ -29,7 +29,7 @@ class LoginContainer extends Component {
     .catch(err => {
       console.log(err);
       this.setState({
-        errorMessage : 'Email or Password is Incorrect !'
+        errorMessage : err
       })
     })
   } 

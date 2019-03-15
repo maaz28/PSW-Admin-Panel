@@ -65,6 +65,7 @@ class EventForm extends React.Component {
         category : '',
         color : [],
         images : [],
+        existing_images : [],
         dialogOpen : false,
         // checked : {
         //   pink : false,
@@ -76,10 +77,10 @@ class EventForm extends React.Component {
 
     componentDidMount () { 
       let edit_obj = this.props.edit_obj;
-      let imagesArr = edit_obj.images;
-      for(var i=edit_obj.images.length; i<3; i++){
-          imagesArr[i] = ""
-      }
+      // let imagesArr = edit_obj.images; 
+      // for(var i=edit_obj.images.length; i<3; i++){
+      //     imagesArr[i] = ""
+      // }
       this.setState ({
         category : edit_obj.category,
         title : edit_obj.title, 
@@ -88,28 +89,33 @@ class EventForm extends React.Component {
         short_title_description : edit_obj.short_title_description,
         category : edit_obj.category,
         color : edit_obj.color,
-        images : imagesArr
+        existing_images : edit_obj.images
     })
     }
 
-    colorHandler = (value, selected) => {
-        let arr = this.state.color;
-      if (selected) {
-        arr.push(value);
-        this.setState({
-          color : arr
-        })
-      }
-      else {
-        let ind = arr.indexOf(value);
-        if(ind !== -1) {
-          arr.splice(ind, 1)
-          this.setState({
-            color : arr
-          })
-        } 
-      }
+    colorHandler = value => event => {
+      console.log(value);
+      let arr = this.state.color;
+    if (event.target.checked) {
+      arr.push(value);
+      this.setState({
+        color : arr
+      })
     }
+    else {
+      let ind = arr.indexOf(value); 
+      if(ind !== -1) {
+        arr.splice(ind, 1)
+        this.setState({
+          color : arr 
+        })
+      } 
+    }
+    };
+
+
+
+
 
     closePopupHandler = () => {
         this.setState({
@@ -120,9 +126,6 @@ class EventForm extends React.Component {
     
       onChangeParentHandler = (name ,value) => {
         console.log(name, value)
-        // this.setState({
-        // [name]: value,
-        // });
       }
 
       submitHandler = (id) =>{
@@ -138,6 +141,7 @@ class EventForm extends React.Component {
             loader : false
           })
         }else{
+          let imgs = this.state.existing_images.concat(this.state.images)
           let obj = {
             "x-access-token" : this.props.token,
              title : stateObj.title,
@@ -146,12 +150,17 @@ class EventForm extends React.Component {
       short_title_description : stateObj.short_title_description,
       category : stateObj.category,
       color : stateObj.color,
-      product_images : stateObj.images,
+      images : imgs,
       rating : 5
           }
           console.log(obj);
         put_request(api_base_url + "/admin/product/" + id, obj)
-          
+        .then(res => {
+          this.setState({
+            loader : false,
+            dialogOpen : true
+          })
+        })
         }
       }
     
@@ -197,11 +206,11 @@ class EventForm extends React.Component {
   }
 
   deleteBtnHandler = (value) => {
-    let arr = this.state.images;
+    let arr = this.state.existing_images;
     let ind = arr.indexOf(value);
     arr.splice(ind, 1);
     this.setState({
-      images : arr
+      existing_images : arr
     })
   }
 
@@ -335,20 +344,25 @@ class EventForm extends React.Component {
       <h4 className = "title">Product Images</h4>
       <Grid container spacing={24}>
       {
-        this.state.images.map((item, i) => (
+        this.state.existing_images.map((item, i) => (
         <Grid item xs={4}>  
-        {
-          (item !== "") ? (
           <div style={{ backgroundImage: 'url(' + item + ')', backgroundSize : 'cover', backgroundPosition : 'center', backgroundRepeat : 'no-repeat', width : '100px', height : '100px' }}>
           <DeleteOutlinedIcon title = "Delete" style = {{color : 'red', cursor : 'pointer'}} onClick = {this.deleteBtnHandler}/>          
           </div>
-          ) : (
-      <ImageUploader urlHandler = {this.urlHandler}/>
-          )
-        }        
         </Grid>           
         ))
       }
+        <Grid container spacing={24}>
+          <Grid item xs={4}>
+        <ImageUploader urlHandler = {this.urlHandler}/>
+          </Grid>
+          <Grid item xs={4}>
+        <ImageUploader urlHandler = {this.urlHandler}/>              
+          </Grid>
+          <Grid item xs={4}>
+        <ImageUploader urlHandler = {this.urlHandler}/>              
+          </Grid>
+        </Grid>
         {/* <Grid item xs={4}>
       <ImageUploader urlHandler = {this.urlHandler}/>              
         </Grid>
@@ -379,7 +393,7 @@ class EventForm extends React.Component {
           }
           </Grid>
       </Grid>
-        <ConfirmationDialog closePopupHandler = {this.closePopupHandler} open = {this.state.dialogOpen} title = "Product Successfully Added" preview = "/dashboard"/>
+        <ConfirmationDialog closePopupHandler = {this.closePopupHandler} open = {this.state.dialogOpen} title = "Product Successfully Updated" preview = "/dashboard"/>
       </div>
       
       </div>

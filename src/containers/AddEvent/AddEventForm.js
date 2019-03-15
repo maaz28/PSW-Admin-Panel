@@ -76,9 +76,10 @@ colorHandler = (value, selected) => {
         post_request(api_base_url + '/admin/product', obj)
         .then((res) => {
           this.setState({
+            loader : false,
               title : '',
               description : '',
-              price : '',
+              price : '', 
               short_title_description : '',
               category : '',
               color : [],
@@ -106,7 +107,7 @@ colorHandler = (value, selected) => {
       images : arr
     })
   }
-
+ 
 
   render() {
 
