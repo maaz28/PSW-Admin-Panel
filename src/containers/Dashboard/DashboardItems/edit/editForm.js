@@ -154,13 +154,13 @@ class EventForm extends React.Component {
       rating : 5
           }
           console.log(obj);
-        put_request(api_base_url + "/admin/product/" + id, obj)
-        .then(res => {
-          this.setState({
-            loader : false,
-            dialogOpen : true
-          })
-        })
+        // put_request(api_base_url + "/admin/product/" + id, obj)
+        // .then(res => {
+        //   this.setState({
+        //     loader : false,
+        //     dialogOpen : true
+        //   })
+        // })
         }
       }
     

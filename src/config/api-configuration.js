@@ -17,4 +17,4 @@ import 'firebase/storage';
   export const auth = firebase.auth();
   export const db = firebase.database();
   export const storage = firebase.storage();
-  export const api_base_url = "http://psw-server.herokuapp.com"; 
+  export const api_base_url = "https://pink-salt-works-server.herokuapp.com"; 
