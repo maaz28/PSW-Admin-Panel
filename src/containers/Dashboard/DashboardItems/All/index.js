@@ -40,7 +40,6 @@ console.log(this.state.product,"after")
   componentDidMount () {
     get_request(api_base_url + "/products")
     .then((res) => {
-      console.log(res.data.result)
       this.setState({
         product : res.data.result
       })
@@ -53,6 +52,9 @@ console.log(this.state.product,"after")
       <div className="App">
         <Grid container spacing={24}>
         {
+          (this.state.product.length === 0) ? (
+            <div style = {{margin : "16px"}}>No products to show right now.</div>
+          ) : (
           this.state.product.map((item, i) => (
         <Grid xs={12} sm = {6} md = {4}>
         <Card  style={{margin:'8px',boxShadow:" 0 0 8px 1px grey"}}>
@@ -84,6 +86,7 @@ console.log(this.state.product,"after")
     </Card>      
         </Grid>
             ))
+          )
         }
 
         </Grid>

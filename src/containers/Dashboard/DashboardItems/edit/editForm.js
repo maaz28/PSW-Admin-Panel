@@ -67,20 +67,34 @@ class EventForm extends React.Component {
         images : [],
         existing_images : [],
         dialogOpen : false,
-        // checked : {
-        //   pink : false,
-        //   red : false,
-        //   white : false,
-        //   black : false
-        // }
+        checked : {
+          pink : false,
+          red : false,
+          white : false,
+          black : false
+        }
     }
 
     componentDidMount () { 
       let edit_obj = this.props.edit_obj;
-      // let imagesArr = edit_obj.images; 
-      // for(var i=edit_obj.images.length; i<3; i++){
-      //     imagesArr[i] = ""
+      // for (let i = 0; i < edit_obj.color.length; i++) {
+        
       // }
+      let obj = {};
+      for (var key in this.state.checked) {
+    if (this.state.checked.hasOwnProperty(key)) {
+      if(edit_obj.color.includes(key)){
+        obj[key] = true
+      }else{
+        obj[key] = false
+      }
+    }
+}
+
+console.log(obj)
+this.setState({
+  checked : obj
+})
       this.setState ({
         category : edit_obj.category,
         title : edit_obj.title, 
@@ -94,15 +108,20 @@ class EventForm extends React.Component {
     }
 
     colorHandler = value => event => {
-      console.log(value);
+      // console.log();
       let arr = this.state.color;
+      let checked_obj = this.state.checked;
+
     if (event.target.checked) {
       arr.push(value);
+      checked_obj[value] = true;
       this.setState({
-        color : arr
+        color : arr,
+        checked : checked_obj
       })
     }
     else {
+      checked_obj[value] = false;
       let ind = arr.indexOf(value); 
       if(ind !== -1) {
         arr.splice(ind, 1)
@@ -154,13 +173,13 @@ class EventForm extends React.Component {
       rating : 5
           }
           console.log(obj);
-        // put_request(api_base_url + "/admin/product/" + id, obj)
-        // .then(res => {
-        //   this.setState({
-        //     loader : false,
-        //     dialogOpen : true
-        //   })
-        // })
+        put_request(api_base_url + "/admin/product/" + id, obj)
+        .then(res => {
+          this.setState({
+            loader : false,
+            dialogOpen : true
+          })
+        })
         }
       }
     
@@ -311,25 +330,25 @@ class EventForm extends React.Component {
           <FormGroup>   
             <FormControlLabel
               control={
-                <Checkbox onChange={this.colorHandler('red')} value="red" />
+                <Checkbox checked = {this.state.checked.red} onChange={this.colorHandler('red')} value="red" />
               }
               label="Red Color"
             />
             <FormControlLabel
               control={
-                <Checkbox onChange={this.colorHandler('pink')} value="pink" />
+                <Checkbox checked = {this.state.checked.pink} onChange={this.colorHandler('pink')} value="pink" />
               }
               label="Pink Color"
             />
             <FormControlLabel
               control={
-                <Checkbox onChange={this.colorHandler('white')} value="white"/>
+                <Checkbox checked = {this.state.checked.white} onChange={this.colorHandler('white')} value="white"/>
               }
               label="White Color"
             />
             <FormControlLabel
               control={
-                <Checkbox onChange={this.colorHandler('black')} value="black"/>
+                <Checkbox checked = {this.state.checked.black} onChange={this.colorHandler('black')} value="black"/>
               }
               label="Black Color"
             />
