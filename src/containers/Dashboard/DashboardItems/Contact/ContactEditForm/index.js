@@ -26,15 +26,15 @@ class ContactEditForm extends Component {
   }
 
   render() {
-    return (
+    return ( 
       <div className="App">
         <Grid container spacing={24}>
-        <Grid item xs={5}>
+        <Grid item xs={12} md={5}>
         <Paper style = {{padding : "16px"}}>
         <ContactForm submitHandler = {this.submitHandler}/>
         </Paper>
         </Grid>   
-        <Grid item xs={7}>
+        <Grid item xs={0} md={7}>
 
         </Grid>
         </Grid>

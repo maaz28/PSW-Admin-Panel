@@ -150,11 +150,31 @@ class EventForm extends React.Component {
             <MenuItem value={"Health-Care-Products"}>Health Care Products</MenuItem>
           </Select>
           </FormControl>
-
+        <TextField
+          helperText = "write comma separated weights"
+          required
+          fullWidth
+          label="Weight"
+          className={classes.textField}
+          margin="normal"
+          placeholder = "2, 3, 5"
+          onChange = {this.handleChange('weight')}
+          />
+          <TextField
+          onBlur ={this.titleErrHandler}
+          error = {this.state.title_err}
+          helperText = "write comma separated dimensions, if more than one."
+          required
+          fullWidth
+          label="Dimension"
+          className={classes.textField}
+          margin="normal"
+          placeholder = "2 * 3 * 4"
+          onChange = {this.handleChange('dimension')}
+          />
 
         <TextField
         // onBlur ={this.titleErrHandler}
-        
         error = {this.state.desc_err}
           required
           fullWidth
@@ -193,6 +213,18 @@ class EventForm extends React.Component {
                 <Checkbox onChange={this.handleSelectChange('black')} value="black"/>
               }
               label="Black Color"
+            />
+                        <FormControlLabel
+              control={
+                <Checkbox onChange={this.handleSelectChange('gray')} value="gray"/>
+              }
+              label="Gray Color"
+            />
+                        <FormControlLabel
+              control={
+                <Checkbox onChange={this.handleSelectChange('wooden')} value="wooden"/>
+              }
+              label="Wooden Color"
             />
           </FormGroup>
           {/* <FormHelperText>Be careful</FormHelperText> */}

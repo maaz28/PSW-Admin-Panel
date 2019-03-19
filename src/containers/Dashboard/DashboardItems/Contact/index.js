@@ -39,7 +39,7 @@ class Contact extends Component {
     return (
       <div className="App">
         <Grid container spacing={24}>
-        <Grid item xs={5}>
+        <Grid item xs={12} md = {5}>
         <Paper style = {{padding : "16px"}}>
         <Button title = "Edit" style = {{float : 'right'}} onClick = {this.editContactHandler}>
         <Edit/>
@@ -55,7 +55,7 @@ class Contact extends Component {
 				</address>
         </Paper>
         </Grid>   
-        <Grid item xs={7}>
+        <Grid item xs={0} md = {7}>
 
         </Grid>
         </Grid>

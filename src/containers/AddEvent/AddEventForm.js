@@ -18,6 +18,8 @@ state ={
   price : '',
   short_title_description : '',
   category : '',
+  weight : '',
+  dimension : '',
   color : [],
   images : [],
   dialogOpen : false
@@ -62,6 +64,8 @@ colorHandler = (value, selected) => {
         loader : false
       })
     }else{
+      let weight_arr = stateObj.weight.split(',');
+          let dimension_arr = stateObj.dimension.split(',');
       let obj = {
             "x-access-token" : this.props.token,
          title : stateObj.title,
@@ -69,10 +73,15 @@ colorHandler = (value, selected) => {
   price : stateObj.price,
   short_title_description : stateObj.short_title_description,
   category : stateObj.category,
+  weight : weight_arr,
+  dimension : dimension_arr,
   color : stateObj.color,
   images : stateObj.images,
   rating : 5 
       }
+      console.log('====================================');
+      console.log(obj);
+      console.log('====================================');
         post_request(api_base_url + '/admin/product', obj)
         .then((res) => {
           this.setState({
@@ -117,13 +126,13 @@ colorHandler = (value, selected) => {
         <div>
         <h4 className = "title">Product Images</h4>
         <Grid container spacing={24}>
-          <Grid item xs={4}>
+          <Grid item xs={12} md = {4} >
         <ImageUploader urlHandler = {this.urlHandler}/>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} md = {4} >
         <ImageUploader urlHandler = {this.urlHandler}/>              
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} md = {4} >
         <ImageUploader urlHandler = {this.urlHandler}/>              
           </Grid>
         </Grid>

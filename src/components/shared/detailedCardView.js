@@ -74,10 +74,10 @@ class MediaControlCard extends Component {
           {details.title}
           </Typography>
           {/* <Grid container spacing={24}>
-        <Grid item xs={4} md={3}></Grid>        
+        <Grid item xs={12} md = {4}  md={3}></Grid>        
         </Grid> */}
         <Grid container spacing={24} style = {{marginTop : "16px"}}>
-            <Grid item xs={4} md={3}>
+            <Grid item xs={12} md = {4}  md={3}>
             <Typography variant="subtitle2" style = {{backgroundColor : '#EFF1F4', textAlign : 'center', padding : '4px'}} gutterBottom>
                 Venue
             </Typography>
@@ -89,7 +89,7 @@ class MediaControlCard extends Component {
             </Typography>
             </Grid>
             <Divider />
-            <Grid item xs={4} md={3}>
+            <Grid item xs={12} md = {4}  md={3}>
             <Typography variant="subtitle2" gutterBottom style = {{backgroundColor : '#EFF1F4', textAlign : 'center', padding : '4px'}}>
                 Time
             </Typography>
@@ -99,7 +99,7 @@ class MediaControlCard extends Component {
             {this.renderDate(details.date.start)}
             </Grid>
             <Divider />
-            <Grid item xs={4} md={3}>
+            <Grid item xs={12} md = {4}  md={3}>
             <Typography variant="subtitle2" gutterBottom style = {{backgroundColor : '#EFF1F4', textAlign : 'center', padding : '4px'}}>
                 Create By
             </Typography>

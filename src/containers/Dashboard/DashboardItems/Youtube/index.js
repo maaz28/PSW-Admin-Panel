@@ -27,12 +27,12 @@ submitHandler = (url, id) => {
     return (
       <div className="App">
               <Grid container spacing={24}>
-        <Grid item xs={6}>
+        <Grid item md={6} xs = {12}>
         <Paper style = {{padding : "16px"}}>
         <YoutubeForm submitHandler = {this.submitHandler} success = {this.state.success}/>
         </Paper>
         </Grid>   
-        <Grid item xs={6}>
+        <Grid item md={6} xs = {0}>
 
         </Grid>
         </Grid>

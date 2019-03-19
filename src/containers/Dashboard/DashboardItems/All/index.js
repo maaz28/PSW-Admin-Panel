@@ -53,7 +53,7 @@ console.log(this.state.product,"after")
         <Grid container spacing={24}>
         {
           (this.state.product.length === 0) ? (
-            <div style = {{margin : "16px"}}>No products to show right now.</div>
+            <div style = {{margin : "16px"}}>Loading ...</div>
           ) : (
           this.state.product.map((item, i) => (
         <Grid xs={12} sm = {6} md = {4}>

@@ -62,7 +62,8 @@ class EventForm extends React.Component {
         description : '',
         price : '',
         short_title_description : '',
-        category : '',
+        weight : '',
+        dimension : '',
         color : [],
         images : [],
         existing_images : [],
@@ -71,7 +72,9 @@ class EventForm extends React.Component {
           pink : false,
           red : false,
           white : false,
-          black : false
+          black : false,
+          gray : false,
+          wooden : false
         }
     }
 
@@ -160,6 +163,8 @@ this.setState({
             loader : false
           })
         }else{
+          let weight_arr = stateObj.weight.split(',');
+          let dimension_arr = stateObj.dimension.split(',');
           let imgs = this.state.existing_images.concat(this.state.images)
           let obj = {
             "x-access-token" : this.props.token,
@@ -170,7 +175,9 @@ this.setState({
       category : stateObj.category,
       color : stateObj.color,
       images : imgs,
-      rating : 5
+      rating : 5,
+      weight : weight_arr,
+      dimension : dimension_arr
           }
           console.log(obj);
         put_request(api_base_url + "/admin/product/" + id, obj)
@@ -324,6 +331,26 @@ this.setState({
           </Select>
           </FormControl>
 
+          <TextField
+          helperText = "write comma separated weights"
+          required
+          fullWidth
+          label="Weight"
+          className={classes.textField}
+          margin="normal"
+          placeholder = "2, 3, 5"
+          onChange = {this.handleChange('weight')}
+          />
+          <TextField
+          helperText = "write comma separated dimensions, if more than one."
+          required
+          fullWidth
+          label="Dimension"
+          className={classes.textField}
+          margin="normal"
+          placeholder = "2 * 3 * 4"
+          onChange = {this.handleChange('dimension')}
+          />
 
           <FormControl component="fieldset" className={classes.formControl} style={{width:'50%'}}>
           <FormLabel component="legend">Color</FormLabel>
@@ -346,6 +373,18 @@ this.setState({
               }
               label="White Color"
             />
+              <FormControlLabel
+              control={
+                <Checkbox checked = {this.state.checked.gray} onChange={this.colorHandler('gray')} value="gray"/>
+              }
+              label="Gray Color"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox checked = {this.state.checked.wooden} onChange={this.colorHandler('wooden')} value="wooden"/>
+              }
+              label="Wooden Color"
+            />
             <FormControlLabel
               control={
                 <Checkbox checked = {this.state.checked.black} onChange={this.colorHandler('black')} value="black"/>
@@ -364,7 +403,7 @@ this.setState({
       <Grid container spacing={24}>
       {
         this.state.existing_images.map((item, i) => (
-        <Grid item xs={4}>  
+        <Grid item xs={12} md = {4} >  
           <div style={{ backgroundImage: 'url(' + item + ')', backgroundSize : 'cover', backgroundPosition : 'center', backgroundRepeat : 'no-repeat', width : '100px', height : '100px' }}>
           <DeleteOutlinedIcon title = "Delete" style = {{color : 'red', cursor : 'pointer'}} onClick = {this.deleteBtnHandler}/>          
           </div>
@@ -372,20 +411,20 @@ this.setState({
         ))
       }
         <Grid container spacing={24}>
-          <Grid item xs={4}>
+          <Grid item xs={12} md = {4} >
         <ImageUploader urlHandler = {this.urlHandler}/>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} md = {4} >
         <ImageUploader urlHandler = {this.urlHandler}/>              
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} md = {4} >
         <ImageUploader urlHandler = {this.urlHandler}/>              
           </Grid>
         </Grid>
-        {/* <Grid item xs={4}>
+        {/* <Grid item xs={12} md = {4} >
       <ImageUploader urlHandler = {this.urlHandler}/>              
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} md = {4} >
       <ImageUploader urlHandler = {this.urlHandler}/>              
         </Grid> */}
       </Grid>
