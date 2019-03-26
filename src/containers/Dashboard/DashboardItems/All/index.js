@@ -6,6 +6,7 @@ import { CardActions, Button, Typography, CardContent, CardMedia, CardActionArea
 import history from '../../../../config/history';
 import {connect} from 'react-redux';
 import { EDIT_OBJ_DATA } from '../../../../redux/actions/root.action';
+import AlertDialog from '../../../../components/shared/AlertDialog';
 
 
 class All extends Component {
@@ -14,22 +15,18 @@ class All extends Component {
   }
 
   deleteBtnHandler= (id)=>{
-console.log("delete")
-console.log(this.state.product,'before')
 // console.log(this.state.product.map(function(e) { return e._id; }).indexOf(id))
 let pos = this.state.product.map(function(e) { return e._id; }).indexOf(id);
 let arr=this.state.product;
 delete_request(api_base_url+"/admin/product/"+id, {'x-access-token' : this.props.token}).
 then((res)=>{
   console.log(res);
-  
 }
 )
 arr.splice(pos,1);
 this.setState({
   product:arr
 })
-console.log(this.state.product,"after")
   }
 
   editBtnHanlder=(data)=>{
@@ -78,10 +75,10 @@ console.log(this.state.product,"after")
         <Button size="small" color="primary" onClick={ () => {this.editBtnHanlder(item)} }>
           Edit
         </Button>
-        {/* </Link> */}
-        <Button size="small" color="primary" onClick={() => {this.deleteBtnHandler(item._id)} }>
+        <AlertDialog deleteBtnHandler = {this.deleteBtnHandler} _id = {item._id}/>
+        {/* <Button size="small" color="primary" onClick={() => {this.openHandler()} } deleteBtnHandler = {() => { this.deleteBtnHandler(item._id) }}>
           Delete
-        </Button>
+        </Button> */}
       </CardActions>
     </Card>      
         </Grid>

@@ -1,5 +1,5 @@
 {
   "projects": {
-    "build": "psw-admin-panel"
+    "default": "psw-admin-panel"
   }
 }

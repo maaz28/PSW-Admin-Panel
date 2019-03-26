@@ -31,6 +31,8 @@ import AllSaltBenefits from './DashboardItems/AllBenefits/allSaltBenefits';
 import Youtube from './DashboardItems/Youtube';
 import Contact from './DashboardItems/Contact';
 import ContactEditForm from './DashboardItems/Contact/ContactEditForm';
+import AddContactForm from './DashboardItems/Contact/AddContactForm';
+
 
 
 
@@ -199,6 +201,7 @@ class Dashboard extends React.Component {
         <Route exact path = '/dashboard/youtube-url' component={Youtube}/>
         <Route exact path = '/dashboard/contact-data' component={Contact}/>
         <Route exact path = '/dashboard/contact-edit' component={ContactEditForm}/>
+        <Route exact path = '/dashboard/add-contact' component={AddContactForm}/>
         {/* <Route exact path = '/dashboard/add-salt-benefits' component={AddSaltBenefits}/>
         <Route exact path = '/dashboard/all-salt-benefits' component={AllSaltBenefits}/> */}
         </div>

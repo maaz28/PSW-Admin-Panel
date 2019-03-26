@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
-import { connect } from 'react-redux';
 
 const styles = theme => ({
   container: {
@@ -22,6 +21,7 @@ class ContactForm extends React.Component {
       email : "admin@p",
       address : "fnwe93092",
       phone : "+92 331 1384444",
+      title : "",
       error_message : ""
   };
 
@@ -42,6 +42,7 @@ class ContactForm extends React.Component {
         this.setState({
           error_message : ""
         })
+        console.log("obj", obj)
         this.props.submitHandler(obj, this.props.contact_data._id);
       }
   }  
@@ -53,6 +54,13 @@ class ContactForm extends React.Component {
         <div>
             <p style = {{color : 'red'}}>{this.state.error_message}</p>
       <form className={classes.container} noValidate autoComplete="off">
+        <TextField
+          label="Title"
+          defaultValue = {contact_data.title}
+          className={classes.textField}
+          margin="normal"
+          onChange = {this.handleChange("title")}
+        />
         <TextField
           label="Address"
           defaultValue = {contact_data.address}
@@ -89,12 +97,7 @@ ContactForm.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-function mapStateToProp(state) {
-	console.log(state.contact_reducer, state.user_reducer)
-	return ({
-		contact_data : state.contact_reducer.contact_data
-	})
-}
 
 
-export default connect(mapStateToProp, null)(withStyles(styles)(ContactForm)); 
+
+export default (withStyles(styles)(ContactForm)); 

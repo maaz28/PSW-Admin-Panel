@@ -66,9 +66,6 @@ class ConfirmationDialog extends React.Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            {/* <Button onClick={this.previewHandler} color="primary" autoFocus>
-                Preview
-            </Button> */}
             <Button onClick={this.handleClose} color="primary" autoFocus>
                 Okay
             </Button>

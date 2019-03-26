@@ -135,6 +135,15 @@ colorHandler = (value, selected) => {
           <Grid item xs={12} md = {4} >
         <ImageUploader urlHandler = {this.urlHandler}/>              
           </Grid>
+                    <Grid item xs={12} md = {4} >
+        <ImageUploader urlHandler = {this.urlHandler}/>              
+          </Grid>
+                    <Grid item xs={12} md = {4} >
+        <ImageUploader urlHandler = {this.urlHandler}/>              
+          </Grid>
+                    <Grid item xs={12} md = {4} >
+        <ImageUploader urlHandler = {this.urlHandler}/>              
+          </Grid>
         </Grid>
         </div>
       <div>
